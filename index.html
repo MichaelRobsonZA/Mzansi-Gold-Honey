@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mzansi Gold - South Africa's Most Audacious Honey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;700&family=Inter:wght@400;700&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #f3f3f3;
+            overflow-x: hidden;
+        }
+
+        .font-honey {
+            font-family: 'Yellowtail', cursive;
+        }
+
+        .font-title {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .hero-title {
+            font-family: 'Cinzel Decorative', serif;
+            color: #FFC700; /* Bright Gold */
+            -webkit-text-stroke: 1px #000;
+            paint-order: stroke fill;
+            text-shadow: 0px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-family: 'Cinzel', serif;
+            color: #FFC700;
+            -webkit-text-stroke: 0.5px #000;
+            paint-order: stroke fill;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Honey Drip Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .honeycomb-loader {
+            display: flex;
+        }
+
+        .honeycomb-loader div {
+            width: 40px;
+            height: 46px;
+            background: #FFB300;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin: 0 5px;
+            animation: drip 1.5s infinite;
+        }
+        
+        .honeycomb-loader div:nth-child(2) { animation-delay: 0.2s; }
+        .honeycomb-loader div:nth-child(3) { animation-delay: 0.4s; }
+        .honeycomb-loader div:nth-child(4) { animation-delay: 0.6s; }
+        .honeycomb-loader div:nth-child(5) { animation-delay: 0.8s; }
+
+
+        @keyframes drip {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(30px);
+                opacity: 0.3;
+            }
+        }
+
+        /* Hero Video */
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in { animation: fadeIn 1.5s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Honeycomb Background */
+        .honeycomb-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .honeycomb {
+            position: absolute;
+            width: 100px;
+            height: 115px;
+            background: rgba(255, 179, 0, 0.05);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        .honeycomb:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
+        .honeycomb:nth-child(2) { top: 20%; left: 80%; animation-duration: 15s; animation-delay: 2s;}
+        .honeycomb:nth-child(3) { top: 70%; left: 15%; animation-duration: 10s; animation-delay: 4s;}
+        .honeycomb:nth-child(4) { top: 80%; left: 60%; animation-duration: 18s; animation-delay: 1s;}
+        .honeycomb:nth-child(5) { top: 40%; left: 40%; animation-duration: 14s; animation-delay: 3s;}
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Drip SVG */
+        .drip-divider {
+            width: 100%;
+            height: 80px;
+            position: relative;
+            bottom: -1px; /* To prevent gaps */
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Honey Drip Loader -->
+    <div id="loader" class="loader">
+        <div class="honeycomb-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="invisible">
+        <!-- Header -->
+        <header class="absolute top-0 left-0 right-0 z-10 p-6 md:p-8">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-3xl font-honey text-amber-400">Mzansi Gold</div>
+                <nav class="hidden md:flex space-x-8 text-white">
+                    <a href="#about" class="hover:text-amber-400 transition-colors">The Story</a>
+                    <a href="#product" class="hover:text-amber-400 transition-colors">The Honey</a>
+                    <a href="#discover" class="hover:text-amber-400 transition-colors">Discover</a>
+                </nav>
+                <a href="#product" class="bg-amber-500 text-black font-bold py-2 px-6 rounded-full hover:bg-amber-400 transition-transform duration-300 hover:scale-105">
+                    Shop Now
+                </a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+            <video autoplay loop muted playsinline id="hero-video">
+                <source src="https://storage.googleapis.com/gemini-prod-us-west1-vod-usw1-d/Whisk_mgmygtzmvgzzcty50syjzdotitolrtlkrmzl1iz.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <div class="relative z-5 animate-fade-in">
+                <h1 class="hero-title text-5xl md:text-8xl lg:text-9xl tracking-widest uppercase" style="animation-delay: 0.5s;">
+                    Mzansi Gold
+                </h1>
+                <p class="hero-subtitle text-2xl md:text-4xl lg:text-5xl mt-2 md:mt-4 tracking-wider uppercase" style="animation-delay: 0.8s;">
+                    WILD. LEGENDARY.
+                </p>
+                <p class="mt-4 md:mt-6 text-lg md:text-xl max-w-2xl mx-auto" style="animation-delay: 1.1s;">
+                    South Africa's Most Audacious Honey. Taste the Wild.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: About -->
+        <section id="about" class="py-20 md:py-32 bg-[#121212] relative">
+             <div class="honeycomb-bg">
+                <div class="honeycomb"></div>
+                <div class="honeycomb"></div>
+                <div class="honeycomb"></div>
+             </div>
+            <div class="container mx-auto px-6 text-center reveal">
+                <h2 class="font-honey text-5xl md:text-6xl text-amber-400 mb-6">A Taste of the Wild</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-gray-300">
+                    Deep within the rugged, untouched landscapes of the South African Fynbos, our bees craft a liquid gold unlike any other. Mzansi Gold is more than just honey; it's an experience. It's the taste of wild blossoms, the warmth of the African sun, and a story of nature's untamed spirit, bottled just for you.
+                </p>
+                <img src="images\Product.png" alt="Mzansi Gold Honey in a natural setting" class="mt-12 mx-auto rounded-2xl shadow-2xl max-w-full md:max-w-3xl shadow-amber-900/20">
+            </div>
+        </section>
+
+        <!-- Honey Drip Divider -->
+        <div class="bg-[#121212]">
+            <svg class="drip-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="#0a0a0a">
+                <path d="M0,0 C150,50 250,60 400,30 C550,0 650,50 800,40 C950,30 1050,70 1200,50 C1350,30 1440,60 1440,60 L1440,80 L0,80 Z"></path>
+                <path d="M0,40 C100,80 200,70 350,50 C500,30 600,80 750,60 C900,40 1000,80 1150,70 C1300,60 1440,80 1440,80 L1440,80 L0,80 Z" opacity="0.5"></path>
+            </svg>
+        </div>
+        
+        <!-- Section 3: The Product -->
+        <section id="product" class="py-20 md:py-32 bg-black relative">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-16 reveal">
+                <div class="w-full md:w-1/2">
+                    <img src="images\Flyer.png" alt="Jar of Mzansi Gold Raw Fynbos Honey" class="rounded-2xl shadow-2xl w-full mx-auto max-w-md shadow-amber-900/30 transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <span class="text-amber-400 font-bold tracking-widest">RAW FYNBOS HONEY</span>
+                    <h2 class="font-title text-4xl md:text-5xl my-4">The Mzansi Gold Standard</h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        Pure, unpasteurized, and straight from the hive. Our Raw Fynbos Honey boasts a rich, complex flavour profile with delicate floral notes and a warm, amber hue. Each spoonful is a testament to the pristine biodiversity of the Cape Floral Kingdom.
+                    </p>
+                    <div class="my-6">
+                        <span class="font-bold text-3xl text-amber-300 mr-4">R150.00</span>
+                        <span class="text-gray-400">450g Jar</span>
+                    </div>
+                    <button class="bg-amber-500 text-black font-bold py-4 px-10 rounded-full text-lg hover:bg-amber-400 transition-all duration-300 hover:scale-105 transform">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: Discover -->
+        <section id="discover" class="py-20 md:py-32 bg-[#121212] relative">
+            <div class="honeycomb-bg">
+                <div class="honeycomb" style="top: 15%; left: 90%; animation-duration: 16s;"></div>
+                <div class="honeycomb" style="top: 65%; left: 5%; animation-duration: 13s;"></div>
+                <div class="honeycomb" style="top: 50%; left: 50%; animation-duration: 11s;"></div>
+             </div>
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-honey text-5xl md:text-6xl text-amber-400 mb-12 reveal">Discover the Legend</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-black p-8 rounded-2xl reveal" style="transition-delay: 100ms;">
+                        <div class="text-amber-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        </div>
+                        <h3 class="font-title text-2xl mb-2">Sourced from Fynbos</h3>
+                        <p class="text-gray-400">Harvested from the unique and biodiverse Cape Floral Kingdom.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="bg-black p-8 rounded-2xl reveal" style="transition-delay: 200ms;">
+                        <div class="text-amber-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-heptagon mx-auto" viewBox="0 0 16 16"><path d="M7.778.036a.5.5 0 0 1 .444 0l6.856 3.292a.5.5 0 0 1 .222.444v6.456a.5.5 0 0 1-.222.444l-6.856 3.292a.5.5 0 0 1-.444 0L.922 10.672a.5.5 0 0 1-.222-.444V3.772a.5.5 0 0 1 .222-.444L7.778.036zM8 1.155L1.848 4.02v5.96l6.152 2.954 6.152-2.954V4.02L8 1.155z"/></svg>
+                        </div>
+                        <h3 class="font-title text-2xl mb-2">Completely Raw</h3>
+                        <p class="text-gray-400">Never heated or filtered, preserving all its natural nutrients.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="bg-black p-8 rounded-2xl reveal" style="transition-delay: 300ms;">
+                         <div class="text-amber-400 mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-award mx-auto" viewBox="0 0 16 16"><path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/><path d="M8 11.794l-1.833 2.517-3.333-1.22L2.5 14.56l3.667 1.348L8 15.9l1.833-1.009 3.667-1.348L11.5 13.09l-3.333 1.22L8 11.794z"/></svg>
+                        </div>
+                        <h3 class="font-title text-2xl mb-2">Audaciously Bold</h3>
+                        <p class="text-gray-400">A rich, unforgettable flavour that stands apart from the rest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black py-12">
+            <div class="container mx-auto px-6 text-center text-gray-400">
+                <div class="text-3xl font-honey text-amber-400 mb-4">Mzansi Gold</div>
+                <p>Taste the Wild. Discover the Legend.</p>
+                <p class="mt-2 text-sm">mzansigoldhoney.com</p>
+                <div class="flex justify-center space-x-6 mt-6">
+                    <a href="#" class="hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.231 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.843-.038 1.096-.047 3.232-.047h.001zm4.905 1.72c-.412 0-.748.336-.748.747s.336.748.748.748.748-.336.748-.748-.336-.747-.748-.747zm-4.21 1.442a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96zM8 11.248a2.48 2.48 0 1 1 0-4.96 2.48 2.48 0 0 1 0 4.96z"/></svg>
+                    </a>
+                     <a href="#" class="hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0 0 3.596 0 8.049c0 4.141 3.054 7.587 7.03 7.962V9.894H5.03v-2.35h1.999V5.704c0-2.006 1.192-3.098 3.01-3.098 1.34 0 2.22.1.25.148v2.01h-1.15c-1.002 0-1.19.48-1.19 1.168v1.488h2.24l-.286 2.35h-1.954v6.033C12.946 15.636 16 12.19 16 8.049z"/></svg>
+                    </a>
+                     <a href="#" class="hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/></svg>
+                    </a>
+                </div>
+                <p class="text-xs mt-8 text-gray-500">&copy; 2025 Mzansi Gold Honey. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            const mainContent = document.getElementById('main-content');
+            
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                mainContent.classList.remove('invisible');
+                mainContent.classList.add('animate-fade-in');
+            }, 1000); // Simulate loading time
+        });
+
+        // Scroll Animations
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // initial check
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
